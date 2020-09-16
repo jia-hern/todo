@@ -30,23 +30,21 @@ class App extends Component {
     this.setState(temp);
   };
   handleEdit = (id) => {
-    {
-      /* to do something like that: <button onClick={() 
+    /* to do something like that: <button onClick={() 
       => (this.setState({list[i][1] = true}))}>Edit</button> */
-    }
     let templist = [...this.state.list];
     //to display the form & hide original edit button
     templist[id][1] = true;
     // to "reset any other todos that have the forms open"
     for (let index = 0; index < templist.length; index++) {
-      if (index != id) {
+      if (index !== id) {
         templist[index][1] = false;
         templist[index][2] = false;
       }
     }
     //dk why the next 2 lines dont work
     // let text = templist[id][0];
-    // templist = templist.splice(id, 1, [text, false, false]);
+    // templist = templist.splice(id, 1, [text, true, true]);
     this.setState({ list: templist });
     //to show the confirm edit button
     templist[id][2] = true;
@@ -79,7 +77,7 @@ class App extends Component {
         <h1>Todo list</h1>
         {/* this sections displays all todos in the list  */}
         {this.state.list.map((item, i) => (
-          <div id={i}>
+          <div key={i}>
             {item[1] ? (
               <input
                 type="text"
